@@ -46,7 +46,7 @@ class LinkedList {
 
   insert(value, index) {
     if (index < 0 || index > this.size) {
-      console.log('Invalid index');
+      console.log("Invalid index");
       return;
     }
 
@@ -63,10 +63,34 @@ class LinkedList {
     }
   }
 
+  remove(index) {
+    if (index < 0 || index > this.size) {
+      console.log("Invalid index");
+      return;
+    }
+
+    let removedNode;
+
+    if (index === 0) {
+      removedNode = this.head;
+      this.head = this.head.next;
+    } else {
+      let prev = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        prev = prev.next;
+      }
+      removedNode = prev.next;
+      prev.next = removedNode.next;
+      this.size--
+    }
+
+    return removedNode.value;
+  }
+
   print() {
-    let listValues = '';
+    let listValues = "";
     if (this.isEmpty()) {
-      console.log('List is empty');
+      console.log("List is empty");
     } else {
       let curr = this.head;
       while (curr) {
@@ -85,4 +109,5 @@ list.prepend(20);
 list.prepend(30);
 list.append(40);
 list.insert(50, 4);
+list.remove(4)
 console.log(list.print());
