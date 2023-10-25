@@ -81,10 +81,36 @@ class LinkedList {
       }
       removedNode = prev.next;
       prev.next = removedNode.next;
-      this.size--
+      this.size--;
     }
 
     return removedNode.value;
+  }
+
+  removeValue(value) {
+    if (this.isEmpty()) {
+      return null;
+    }
+
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.size--;
+      return value;
+    }
+
+    let prev = this.head;
+
+    while (prev.next && prev.next.value !== value) {
+      prev = prev.next;
+    }
+
+    if (prev.next) {
+      let removedNode = prev.next;
+      prev.next = removedNode.next;
+      this.size--;
+      return value;
+    }
+    return null;
   }
 
   print() {
@@ -109,5 +135,6 @@ list.prepend(20);
 list.prepend(30);
 list.append(40);
 list.insert(50, 4);
-list.remove(4)
+list.remove(4);
+list.removeValue(10);
 console.log(list.print());
